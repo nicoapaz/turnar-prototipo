@@ -1,40 +1,42 @@
-# TurnAR · Prototipo navegable
+# TurnAR · prototipo interactivo
 
-Una maqueta de la app para pacientes de **TurnAR**: sacar turno, confirmar asistencia, ver estudios y pagar el coseguro desde el teléfono, sin llamar a la clínica.
+Prototipo de una app de turnos médicos para el celular: sacar turno, confirmar asistencia, ver estudios y pagar el coseguro.
 
-> 🧪 **Es un prototipo.** Todos los datos son ficticios: pacientes, profesionales, matrículas y contraseñas de ejemplo. No hay backend ni datos reales.
+**Probalo acá:** https://nicoapaz.github.io/turnar-prototipo/
 
-## Probalo
+> **Todo es ficticio.** Pacientes, profesionales, obras sociales, teléfonos, números de afiliado, DNI, estudios y precios son inventados. No se conecta con ningún servicio, no envía mensajes y no procesa pagos.
 
-**https://nicoapaz.github.io/turnar-prototipo/** *(se activa con GitHub Pages, ver abajo)*
+## Qué se puede hacer de verdad
 
-Se toca como si fuera el teléfono, con marco de iPhone. Podés arrancar desde dos puntos: **paciente nuevo** (registro) o **paciente con turno** (inicio). Abierto desde el celular se ve mejor.
+- **Registrarse**: escribir celular, validar el código (de prueba: `123456`), cargar nombre, DNI, fecha de nacimiento y obra social, crear contraseña. Cada paso valida lo que escribís.
+- **Sacar un turno** de consulta o de estudio por imágenes: elegir especialidad (con buscador), profesional o "el primero disponible", día en el calendario, horario, cobertura y confirmar. Lo elegido aparece en las pantallas siguientes y en el inicio.
+- **Subir el pedido médico** para un estudio (se recuerda solo el nombre del archivo; no se guarda su contenido).
+- **Confirmar, reprogramar o cancelar** un turno; los horarios ocupados desaparecen y los liberados vuelven.
+- **Pagar el coseguro** (simulado) y ver el comprobante en el historial.
+- **Ver estudios**, compartirlos (simulado) y pedir turno desde un resultado.
+- **Grupo familiar**: cambiar de perfil, agregar personas, vincular otra obra social.
+- **Ajustes**: recordatorios, tamaño del texto, descargar el turno como evento `.ics` para el calendario.
 
-## Qué se puede recorrer
+Hay tres puntos de entrada desde el panel izquierdo: paciente nuevo, paciente con turno y recordatorio 48 hs antes.
 
-| Recorrido | Qué muestra |
-|---|---|
-| Registro sin contraseña | Se entra con celular o mail y un código. Se cargan nombre, fecha de nacimiento y obra social (esta última se puede dejar para después) |
-| Ingreso con la cara | Contraseña como respaldo y reconocimiento facial que guarda el teléfono, no la clínica |
-| Sacar turno en 5 pasos | Especialidad, profesional o "el primero disponible", pedido médico con foto cuando el estudio lo exige, día y horario, y cobertura o pago |
-| Confirmar asistencia | Recordatorio 48 hs antes con tres salidas: confirmar, reprogramar o avisar que no se puede ir |
-| Estudios y pagos | Resultados nuevos y coseguro pendiente |
-| Grupo familiar | Gestionar los turnos de otra persona desde la misma cuenta |
+## Qué NO hace
 
-## Cómo se hizo
+- No hay servidor ni base de datos: todo queda **en tu navegador** (`localStorage`). "Reiniciar el recorrido" lo borra.
+- No manda SMS, WhatsApp, correos ni notificaciones reales; el chat "Escribinos" es de ejemplo.
+- La disponibilidad de turnos está calculada con una regla fija, no viene de una agenda real.
+- No usa cámara ni Face ID.
 
-Lo diseñamos conversando con una IA (Claude): partimos de cómo usa un paciente la clínica y fuimos probando pantallas hasta tener un recorrido que se pueda tocar de punta a punta. Nos gusta **documentar todo lo que hacemos** y **experimentar con IA** para ver hasta dónde llega; este repo es parte de ese experimento.
+## Cómo está hecho
 
-El prototipo es un solo archivo (`index.html`). Necesita internet para cargar React y Babel; las tipografías y el logo van incluidos.
+HTML, CSS y JavaScript puros, sin dependencias ni compilación. Tipografías Barlow incluidas en `fonts/`.
 
-## Cómo mantenerlo actualizado
+```
+index.html      pantalla y panel lateral
+css/            estilos y tipografías
+js/data.js      datos ficticios, fechas, disponibilidad e íconos
+js/app.js       estado, pantallas, validaciones y acciones
+```
 
-1. Reemplazar `index.html` con la versión nueva.
-2. Anotar acá qué recorridos cambiaron.
-3. Hacer un commit con un mensaje claro, por ejemplo: `Prototipo: agrega la pantalla de pagos`.
+Para probarlo en tu compu: abrí `index.html` con el navegador. En un celular, la app ocupa toda la pantalla.
 
-## Publicarlo como página web (GitHub Pages)
-
-1. **Settings → Pages**.
-2. En *Build and deployment*, elegí **Deploy from a branch**, rama **main** y carpeta **/ (root)**.
-3. **Save**. En un par de minutos queda en `https://nicoapaz.github.io/turnar-prototipo/`.
+El diseño original se hizo con IA (Claude Design) y esta versión interactiva se reconstruyó con Claude, tomando como base el recorrido, los textos y el logo del primer prototipo.
